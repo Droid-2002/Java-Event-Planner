@@ -1,0 +1,15 @@
+# build output
+out/
+*.class
+
+# dados gerados em runtime (proximas etapas)
+events.csv
+reminders.csv
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# temporario extraido do PDF
+spec.txt
