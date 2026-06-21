@@ -1,13 +1,37 @@
 // Ponto de entrada da aplicacao Java Event Planner.
-// Por enquanto so imprime uma mensagem de inicializacao.
-// A UI em Swing e a persistencia em CSV vem nas proximas etapas.
+// Carrega os dados dos CSV em memoria e abre o login por selecao (RF01).
+// A janela principal vem na proxima etapa.
+
+import javax.swing.SwingUtilities;
+
+import persistence.EventDao;
+import persistence.ReminderDao;
+import service.AppState;
+import ui.LoginDialog;
 
 public class Main {
 
     // RNF01 / DT02: aplicacao single-threaded.
-    // Nao criamos Thread, Runnable nem SwingWorker em lugar nenhum.
-    // Quando a UI existir, tudo roda na EDT nativa do Swing.
+    // Nao criamos Thread, Runnable nem SwingWorker. Toda a UI roda na EDT
+    // nativa do Swing, agendada aqui via SwingUtilities.invokeLater.
     public static void main(String[] args) {
         System.out.println("Java Event Planner - inicializando...");
+
+        SwingUtilities.invokeLater(() -> {
+            // DT01/RNF02: le os dois CSV uma unica vez no startup
+            EventDao eventDao = new EventDao();
+            ReminderDao reminderDao = new ReminderDao();
+            eventDao.load();
+            reminderDao.load();
+
+            AppState state = new AppState(eventDao, reminderDao);
+
+            // RF01: bloqueia ate o usuario escolher quem e (modal)
+            LoginDialog login = new LoginDialog(state);
+            login.setVisible(true);
+
+            System.out.println("Usuario ativo: " + state.getActiveUser());
+            // TODO proxima etapa: abrir a janela principal usando 'state'
+        });
     }
 }
