@@ -55,14 +55,18 @@ public class MainWindow extends JFrame {
         weeklyView.showWeek(inicial);
         teamView.showDay(inicial);
 
-        // barra de cima: criar evento (RF09) e buscar (RF12)
+        // barra de cima: criar evento (RF09), buscar (RF12), editar e excluir
         JButton newEvent = new JButton("Novo Evento");
         newEvent.addActionListener(e -> openEventForm());
-        JButton search = new JButton("Buscar");
+
+        JButton search = new JButton("Buscar e Editar");
         search.addActionListener(e -> openSearch());
+
+
         JPanel toolbar = new JPanel(new FlowLayout(FlowLayout.LEFT));
         toolbar.add(newEvent);
         toolbar.add(search);
+
 
         JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, calendarPanel, tabs);
         split.setDividerLocation(340);
@@ -87,7 +91,7 @@ public class MainWindow extends JFrame {
 
     // abre a busca modal sobre a tela principal (RF12)
     private void openSearch() {
-        SearchDialog dialog = new SearchDialog(this, state.getEventDao());
+        SearchDialog dialog = new SearchDialog(this, state.getEventDao(), state);
         dialog.setVisible(true);
     }
 
