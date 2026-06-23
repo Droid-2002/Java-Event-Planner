@@ -50,11 +50,11 @@ A aplicação oferece 3 visões principais:
 
 2. Compile todos os arquivos Java:
    cd src/main/java
-   javac -d Main.java
+   javac Main.java
 
 3. Execute a aplicação:
    cd ../../../
-   java -cp Main
+   java Main
 
 4. Na primeira execução, você será solicitado a fazer login
    - Escolha um usuário da lista padrão (ex: Alice, Bob, Carol, David, Emma)
