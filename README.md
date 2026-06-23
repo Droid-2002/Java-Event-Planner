@@ -140,4 +140,5 @@ Colunas (RFC 4180 compliant):
 Projeto desenvolvido por:
 
 * **Mateus Vargas Saracuza** – 13674087
+* **Nícolas Silva Scorza** – 17025079
 * **Rafael Mendonça Duarte** – 16817608
